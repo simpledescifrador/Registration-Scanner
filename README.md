@@ -4,5 +4,4 @@ This is an Application for Event Registration using Model-View-Presenter (MVP) D
 
   - RxJava
   - Dagger 2
-  - Room Database
   - Butterknife
