@@ -1,0 +1,41 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    
+    repositories {
+        google()
+        jcenter()
+        
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.0'
+        
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+ext {
+    BUTTER_KNIFE_VERSION = '10.0.0'
+    RETROFIT_RXJAVA2_ADAPTER_VERSION = '2.4.0'
+    RXJAVA2_VERSION = '2.1.13'
+    RXANDROID_VERSION = '2.1.0'
+    RETROFIT_VERSION = '2.5.0'
+    RETROFIT_GSON_CONVERTED_VERSION = '2.5.0'
+    DAGGER_VERSION = '2.22.1'
+    OK_HTTP_VERSION = '3.12.1'
+    OK_HTTP_LOGGING_INTERCEPTOR_VERSION = '3.12.1'
+    GSON_VERSION = '2.8.5'
+}
