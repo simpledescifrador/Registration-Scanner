@@ -4,11 +4,11 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class RegistrationDetails {
-    @SerializedName("id_number")
+    @SerializedName("IdNumber")
     @Expose
     private String idNumber;
 
-    @SerializedName("name")
+    @SerializedName("Name")
     @Expose
     private String name;
 

@@ -25,6 +25,10 @@ public class MainApp extends Application {
         return mApplicationComponent;
     }
 
+    /**
+     *  Set Retrofit Dynamic Host/Base Url
+     * @param host
+     */
     public static void setHostSelectionInterceptorHost(String host) {
         String hostPrefix = "http://";
         mHostSelectionInterceptor.setHost(hostPrefix + host + "/");

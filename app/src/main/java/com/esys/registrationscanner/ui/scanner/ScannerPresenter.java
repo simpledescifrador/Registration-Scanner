@@ -53,25 +53,26 @@ public class ScannerPresenter<V extends ScannerMvpView> extends BasePresenter<V>
                                 return;
                             }
 
-                            if (response.getStatusCode() != 0) {
-                                //Successful
-                                try {
-                                    RegistrationDetails details = response.getData();
-                                    switch (response.getStatusCode()) {
-                                        case 1:
-                                            getMvpView().showRegistrationSuccessDialog("Scan Again?");
-                                            break;
-                                        case 2: //Already Registered
-                                            getMvpView().showInfoDialog("Message", details.getName() + " is already registered.");
-                                            break;
-                                    }
-                                }catch (Exception e) {
-                                    getMvpView().onError("Opps... Error Occurred.");
+                            try {
+                                RegistrationDetails details = response.getData();
+
+                                switch (response.getStatusCode()) {
+                                    case 0: //Error
+                                        getMvpView().showErrorDialog("Registration Failed");
+                                        break;
+                                    case 1: //Success Registered
+                                        getMvpView().showRegistrationSuccessDialog("Scan Again?");
+                                        break;
+                                    case 2: //Already Registered
+                                        getMvpView().showInfoDialog("Message",
+                                                details.getName() + " is already registered.");
+                                        break;
                                 }
-                            } else {
-                                //Error
-                                getMvpView().showErrorDialog("Registration Failed");
+                            } catch (Exception e) {
+                                getMvpView().onError("Opps... Error Occurred.");
                             }
+
+
                         }
 
                         @Override

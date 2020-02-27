@@ -4,15 +4,15 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ResponseWrapper<T> {
-    @SerializedName("status_code")
+    @SerializedName("StatusCode")
     @Expose
     private Integer statusCode;
 
-    @SerializedName("message")
+    @SerializedName("Message")
     @Expose
     private String message;
 
-    @SerializedName("data")
+    @SerializedName("Data")
     @Expose
     private T data;
 
