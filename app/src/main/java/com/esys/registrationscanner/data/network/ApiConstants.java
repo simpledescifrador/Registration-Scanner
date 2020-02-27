@@ -9,7 +9,7 @@ public class ApiConstants {
 
     /*------- END OF API HEADERS -------------*/
 
-    static final String POST_REGISTER_REQUEST_URL = "ws/services/register";
+    static final String POST_REGISTER_REQUEST_URL = "ws/services/Register";
 
     static final String GET_TOTAL_REGISTERED_REQUEST_URL = "ws/services/SELECT_TotalRegistered";
 

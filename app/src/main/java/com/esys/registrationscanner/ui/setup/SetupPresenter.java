@@ -2,6 +2,7 @@ package com.esys.registrationscanner.ui.setup;
 
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Patterns;
 import com.esys.registrationscanner.data.DataManager;
 import com.esys.registrationscanner.ui.base.BasePresenter;
 
@@ -16,12 +17,21 @@ public class SetupPresenter<V extends SetupMvpView> extends BasePresenter<V> imp
 
     @Override
     public void onSetupIpAddress(final String ipAddress) {
+        getMvpView().resetErrors();
         getMvpView().hideKeyboard();
         getMvpView().showLoading();
+
         if (TextUtils.isEmpty(ipAddress)) {
             getMvpView().hideLoading();
             getMvpView().invalidIpAddress("Enter the ip address");
         } else {
+
+            if (!Patterns.IP_ADDRESS.matcher(ipAddress).matches()) {
+                getMvpView().hideLoading();
+                getMvpView().invalidIpAddress("Invalid IP Address");
+                return;
+            }
+
             //Save IP Address
             getDataManager().setIpAddress(ipAddress);
             getDataManager().setSetupStatus(true);
