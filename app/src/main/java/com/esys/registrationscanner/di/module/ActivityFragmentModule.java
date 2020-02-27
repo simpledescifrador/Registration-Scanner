@@ -11,6 +11,9 @@ import com.esys.registrationscanner.ui.main.MainPresenter;
 import com.esys.registrationscanner.ui.scanner.ScannerMvpPresenter;
 import com.esys.registrationscanner.ui.scanner.ScannerMvpView;
 import com.esys.registrationscanner.ui.scanner.ScannerPresenter;
+import com.esys.registrationscanner.ui.setup.SetupMvpPresenter;
+import com.esys.registrationscanner.ui.setup.SetupMvpView;
+import com.esys.registrationscanner.ui.setup.SetupPresenter;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import dagger.Module;
@@ -50,6 +53,12 @@ public class ActivityFragmentModule {
     @Provides
     @ActivityScope
     static ScannerMvpPresenter<ScannerMvpView> provideScannerPresenter(ScannerPresenter<ScannerMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @ActivityScope
+    static SetupMvpPresenter<SetupMvpView> provideSetupPresenter(SetupPresenter<SetupMvpView> presenter) {
         return presenter;
     }
 }

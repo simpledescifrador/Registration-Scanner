@@ -4,6 +4,7 @@ import com.esys.registrationscanner.data.network.ApiConstants;
 import com.esys.registrationscanner.data.network.ApiHelper;
 import com.esys.registrationscanner.data.network.ApiInterface;
 import com.esys.registrationscanner.data.network.AppApiHelper;
+import com.esys.registrationscanner.data.network.HostSelectionInterceptor;
 import com.esys.registrationscanner.di.scope.ApplicationScope;
 
 import java.io.IOException;
@@ -21,6 +22,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class RetrofitModule {
+    private static HostSelectionInterceptor mHostSelectionInterceptor;
+
+    public RetrofitModule(HostSelectionInterceptor hostSelectionInterceptor) {
+        mHostSelectionInterceptor = hostSelectionInterceptor;
+    }
 
     @Provides
     @ApplicationScope
@@ -42,21 +48,26 @@ public class RetrofitModule {
         return httpLoggingInterceptor;
     }
 
+     @Provides
+     @ApplicationScope
+     static HostSelectionInterceptor provideHostSelectionInterceptor() {
+         return mHostSelectionInterceptor;
+     }
+
 
     @Provides
     @ApplicationScope
-    static OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor) {
+    static OkHttpClient provideOkHttpClient(HostSelectionInterceptor hostSelectionInterceptor, HttpLoggingInterceptor httpLoggingInterceptor) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(final Chain chain) throws IOException {
-                Request request = chain.request();
+        builder.addInterceptor(chain -> {
+            Request request = chain.request();
 
-                Request.Builder builder = request.newBuilder()
-                        .addHeader("Content-Type", ApiConstants.CONTENT_TYPE);
-                return chain.proceed(builder.build());
-            }
-        }).addInterceptor(httpLoggingInterceptor);
+            Request.Builder builder1 = request.newBuilder()
+                    .addHeader("Content-Type", ApiConstants.CONTENT_TYPE);
+            return chain.proceed(builder1.build());
+        })
+                .addInterceptor(hostSelectionInterceptor)
+                .addInterceptor(httpLoggingInterceptor);
 
         return builder.build();
     }

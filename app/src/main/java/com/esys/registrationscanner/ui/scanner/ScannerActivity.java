@@ -28,10 +28,12 @@ public class ScannerActivity extends BaseActivity implements ScannerMvpView, ZXi
 
     @Inject
     ScannerMvpPresenter<ScannerMvpView> mPresenter;
+
     private ZXingScannerView mScannerView;
 
     @Inject
     PermissionUtil mPermissionUtil;
+
     @Inject
     AppAlertDialog mAlertDialog;
 
