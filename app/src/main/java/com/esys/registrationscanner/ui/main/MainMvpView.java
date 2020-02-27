@@ -6,4 +6,6 @@ public interface MainMvpView extends BaseMvpView {
     void openScanner();
     void setTotalParticipants(String totalParticipants);
     void setTotalRegistered(String totalRegistered);
+    void setIpDetails(String ipAddress, String ipStatus);
+    void toSetupActivity();
 }

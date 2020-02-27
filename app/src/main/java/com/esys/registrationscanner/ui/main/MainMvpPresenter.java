@@ -7,4 +7,6 @@ public interface MainMvpPresenter<V extends MainMvpView & BaseMvpView> extends P
     void onScanMode();
     void getTotalRegistered();
     void getTotalParticipants();
+    void getIpDetails();
+    void disconnect();
 }

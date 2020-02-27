@@ -120,4 +120,28 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
                     }
                 });
     }
+
+    @Override
+    public void getIpDetails() {
+        String ipAddress = getDataManager().getIpAddress();
+        boolean isSetupCompleted = getDataManager().isSetupCompleted();
+
+        if (isSetupCompleted) {
+            getMvpView().setIpDetails(ipAddress, "Disconnect");
+        }
+    }
+
+    @Override
+    public void disconnect() {
+        //Remove Ip address and go to activity setup
+        getMvpView().showLoading();
+        getDataManager().setSetupStatus(false);
+        getDataManager().setIpAddress("");
+        getMvpView().setIpDetails("", "Disconnected");
+
+        new Handler().postDelayed(() -> {
+            getMvpView().hideLoading();
+            getMvpView().toSetupActivity();
+        }, 1000);
+    }
 }
