@@ -108,6 +108,7 @@ public class ScannerActivity extends BaseActivity implements ScannerMvpView, ZXi
         mAlertDialog.showMaterialDialog("Error", message)
                 .setNegativeButton("CANCEL", (dialog, which) -> {
                     dialog.cancel();
+                    setResult(RESULT_OK);
                     finish();
                 })
                 .setPositiveButton("TRY AGAIN", (dialog, which) -> {
@@ -120,6 +121,7 @@ public class ScannerActivity extends BaseActivity implements ScannerMvpView, ZXi
         mAlertDialog.showMaterialDialog("Registration Successful", message)
                 .setNegativeButton("CANCEL", (dialog, which) -> {
                     dialog.cancel();
+                    setResult(RESULT_OK);
                     finish();
                 })
                 .setPositiveButton("SCAN", (dialog, which) -> {
@@ -132,6 +134,7 @@ public class ScannerActivity extends BaseActivity implements ScannerMvpView, ZXi
         mAlertDialog.showMaterialDialog(title, message)
                 .setNegativeButton("CANCEL", (dialog, which) -> {
                     dialog.cancel();
+                    setResult(RESULT_OK);
                     finish();
                 })
                 .setPositiveButton("TRY AGAIN", (dialog, which) -> {

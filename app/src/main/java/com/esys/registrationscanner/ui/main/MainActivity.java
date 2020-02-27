@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -13,6 +14,7 @@ import com.esys.registrationscanner.ui.scanner.ScannerActivity;
 import com.esys.registrationscanner.ui.setup.SetupActivity;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
+import java.sql.ResultSet;
 import javax.inject.Inject;
 
 public class MainActivity extends BaseActivity implements MainMvpView {
@@ -74,8 +76,17 @@ public class MainActivity extends BaseActivity implements MainMvpView {
     @Override
     public void openScanner() {
         Intent intent = new Intent(this, ScannerActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+        startActivityForResult(intent, 100);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            mPresenter.getTotalParticipants();
+            mPresenter.getTotalRegistered();
+        }
     }
 
     @Override

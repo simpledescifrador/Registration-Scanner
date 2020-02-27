@@ -62,8 +62,7 @@ public class RetrofitModule {
         builder.addInterceptor(chain -> {
             Request request = chain.request();
 
-            Request.Builder builder1 = request.newBuilder()
-                    .addHeader("Content-Type", ApiConstants.CONTENT_TYPE);
+            Request.Builder builder1 = request.newBuilder();
             return chain.proceed(builder1.build());
         })
                 .addInterceptor(hostSelectionInterceptor)

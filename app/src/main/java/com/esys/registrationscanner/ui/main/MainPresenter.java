@@ -35,8 +35,7 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
 
     @Override
     public void getTotalRegistered() {
-//        getMvpView().setTotalRegistered("15");
-        getDataManager().totalParticipants()
+        getDataManager().totalRegistered()
                 .observeOn(getSchedulerProvider().ui())
                 .subscribeOn(getSchedulerProvider().io())
                 .delaySubscription(1000, TimeUnit.MILLISECONDS)
@@ -80,7 +79,7 @@ public class MainPresenter<V extends MainMvpView> extends BasePresenter<V> imple
     @Override
     public void getTotalParticipants() {
 //        getMvpView().setTotalParticipants("49");
-        getDataManager().totalRegistered()
+        getDataManager().totalParticipants()
                 .observeOn(getSchedulerProvider().ui())
                 .subscribeOn(getSchedulerProvider().io())
                 .delaySubscription(1000, TimeUnit.MILLISECONDS)
